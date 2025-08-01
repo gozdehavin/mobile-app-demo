@@ -13,12 +13,13 @@ import {
   AppRegistry,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import HealthHome from './HealthHome';
 const { width, height } = Dimensions.get('window');
 
 interface LoginProps {}
 
-type ScreenType = 'welcome' | 'onboarding' | 'login' | 'register';
+type ScreenType = 'welcome' | 'onboarding' | 'login' | 'register' | 'home';
+
 
 const App: React.FC<LoginProps> = () => {
   const [currentScreen, setCurrentScreen] = useState<ScreenType>('welcome');
@@ -340,7 +341,9 @@ const App: React.FC<LoginProps> = () => {
           </View>
 
           {/* Sign In Button */}
-          <TouchableOpacity style={styles.signInButton}>
+          <TouchableOpacity style={styles.signInButton}
+          onPress={() => setCurrentScreen('home')}  // ← Buraya ekle
+          >
             <LinearGradient
               colors={['#3B82F6', '#2563EB']}
               style={styles.signInGradient}
@@ -555,7 +558,9 @@ const App: React.FC<LoginProps> = () => {
     onboarding: <OnboardingScreen />,
     login: <LoginScreen />,
     register: <RegisterScreen />,
+    home: <HealthHome />,
   };
+
 
   return screens[currentScreen];
 };
